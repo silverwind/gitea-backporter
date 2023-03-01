@@ -118,7 +118,7 @@ export const createBackportPr = async (
       method: "PATCH",
       headers: HEADERS,
       body: JSON.stringify({
-        assignees: [originalPr.user.login],
+        // assignees: [originalPr.user.login],
         milestone: giteaVersion.milestoneNumber,
       }),
     },
