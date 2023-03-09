@@ -141,11 +141,9 @@ export const addLabels = async (prNumber: number, labels: string[]) => {
       body: JSON.stringify({ labels: labels }),
     },
   );
-  const json = await response.json();
+  await response.json();
   console.log(
-    `Added backport/done label to PR #${prNumber}: ${
-      json.map((l: { name: string }) => l.name)
-    }`,
+    `Added backport/done label to PR #${prNumber}`,
   );
 };
 
@@ -158,10 +156,8 @@ export const addPrComment = async (prNumber: number, comment: string) => {
       body: JSON.stringify({ body: comment }),
     },
   );
-  const json = await response.json();
+  await response.json();
   console.log(
-    `Added backport comment to PR #${prNumber}: ${
-      json.map((c: { body: string }) => c.body)
-    }`,
+    `Added backport comment to PR #${prNumber}`,
   );
 };
