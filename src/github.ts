@@ -164,6 +164,7 @@ export const addPrComment = async (prNumber: number, comment: string) => {
       json.map((c: { body: string }) => c.body)
     }`,
   );
+};
 
 // trigger GitHub action using workflow_dispatch
 export const triggerBackportAction = async () => {
