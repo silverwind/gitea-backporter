@@ -164,4 +164,19 @@ export const addPrComment = async (prNumber: number, comment: string) => {
       json.map((c: { body: string }) => c.body)
     }`,
   );
+
+// trigger GitHub action using workflow_dispatch
+export const triggerBackportAction = async () => {
+  const response = await fetch(
+    `${GITHUB_API}/repos/GiteaBot/gitea-backporter/actions/workflows/backport.yml/dispatches`,
+    {
+      method: "POST",
+      headers: HEADERS,
+      body: JSON.stringify({ ref: "main" }),
+    },
+  );
+  if (!response.ok) {
+    throw new Error(`Failed to trigger backport action: ${response.status}`);
+  }
+  console.log(`Triggered backport action`);
 };
