@@ -128,17 +128,17 @@ export const createBackportPr = async (
   const backportLabels = originalPr.labels
     .filter((label) => label.name.startsWith("backport/"));
   if (backportLabels.length === 1) {
-    await addBackportDoneLabel(originalPr.number);
+    await addLabels(originalPr.number, ["backport/done"]);
   }
 };
 
-export const addBackportDoneLabel = async (prNumber: number) => {
+export const addLabels = async (prNumber: number, labels: string[]) => {
   const response = await fetch(
     `${GITHUB_API}/repos/go-gitea/gitea/issues/${prNumber}/labels`,
     {
       method: "POST",
       headers: HEADERS,
-      body: JSON.stringify({ labels: ["backport/done"] }),
+      body: JSON.stringify({ labels: labels }),
     },
   );
   const json = await response.json();
@@ -149,18 +149,19 @@ export const addBackportDoneLabel = async (prNumber: number) => {
   );
 };
 
-// trigger GitHub action using workflow_dispatch
-export const triggerBackportAction = async () => {
+export const addPrComment = async (prNumber: number, comment: string) => {
   const response = await fetch(
-    `${GITHUB_API}/repos/yardenshoham/gitea-backporter/actions/workflows/backport.yml/dispatches`,
+    `${GITHUB_API}/repos/go-gitea/gitea/issues/${prNumber}/comments`,
     {
       method: "POST",
       headers: HEADERS,
-      body: JSON.stringify({ ref: "main" }),
+      body: JSON.stringify({ body: comment }),
     },
   );
-  if (!response.ok) {
-    throw new Error(`Failed to trigger backport action: ${response.status}`);
-  }
-  console.log(`Triggered backport action`);
+  const json = await response.json();
+  console.log(
+    `Added backport comment to PR #${prNumber}: ${
+      json.map((c: { body: string }) => c.body)
+    }`,
+  );
 };
