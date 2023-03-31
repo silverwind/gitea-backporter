@@ -5,7 +5,7 @@ processes = []
 
 [experimental]
   auto_rollback = true
-  cmd = ["run", "--allow-net", "--allow-env", "--allow-run", "/app/src/webhook.ts"]
+  #cmd = ["run", "--allow-net", "--allow-env", "--allow-run", "/app/src/webhook.ts"]
 
 [[services]]
   http_checks = []
