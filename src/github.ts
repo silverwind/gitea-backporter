@@ -24,6 +24,31 @@ export const fetchCandidates = async (giteaMajorMinorVersion: string) => {
   return json;
 };
 
+// returns a list of PRs that are merged and have the given label
+export const fetchMergedWithLabel = async (label: string) => {
+  const response = await fetch(
+    `${GITHUB_API}/search/issues?q=` +
+      encodeURIComponent(
+        `is:pr is:merged label:${label} repo:go-gitea/gitea`,
+      ),
+    { headers: HEADERS },
+  );
+  const json = await response.json();
+  return json;
+};
+
+// given a PR number that has the given label, remove the label
+export const removeLabel = async (
+  prNumber: number,
+  label: string,
+) => {
+  const response = await fetch(
+    `${GITHUB_API}/repos/go-gitea/gitea/issues/${prNumber}/labels/${label}`,
+    { method: "DELETE", headers: HEADERS },
+  );
+  return response;
+};
+
 // returns the PR
 export const fetchPr = async (prNumber: number) => {
   const response = await fetch(
