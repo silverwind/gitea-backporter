@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.184.0/testing/asserts.ts";
-import { fetchBranch, getPrApprovers } from "./github.ts";
+import { fetchBranch, getPrApprovalNumber, getPrApprovers } from "./github.ts";
 
 Deno.test("getPrApprovers() returns the appropriate approvers", async () => {
   const prToApprovers = {
@@ -10,6 +10,20 @@ Deno.test("getPrApprovers() returns the appropriate approvers", async () => {
   await Promise.all(
     Object.entries(prToApprovers).map(async ([pr, approvers]) => {
       assertEquals(await getPrApprovers(Number(pr)), approvers);
+    }),
+  );
+});
+
+Deno.test("getPrApprovalNumber() returns the appropriate approval number", async () => {
+  const prToNumber = {
+    24270: 3,
+    24254: 2,
+    24259: 2,
+    24055: 0,
+  };
+  await Promise.all(
+    Object.entries(prToNumber).map(async ([pr, number]) => {
+      assertEquals(await getPrApprovalNumber(Number(pr)), number);
     }),
   );
 });
