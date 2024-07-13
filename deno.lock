@@ -1,5 +1,22 @@
 {
   "version": "3",
+  "packages": {
+    "specifiers": {
+      "npm:@octokit/types@13.5.0": "npm:@octokit/types@13.5.0"
+    },
+    "npm": {
+      "@octokit/openapi-types@22.2.0": {
+        "integrity": "sha512-QBhVjcUa9W7Wwhm6DBFu6ZZ+1/t/oYxqc2tp81Pi41YNuJinbFRx8B133qVOrAaBbF7D/m0Et6f9/pZt9Rc+tg==",
+        "dependencies": {}
+      },
+      "@octokit/types@13.5.0": {
+        "integrity": "sha512-HdqWTf5Z3qwDVlzCrP8UJquMwunpDiMPt5er+QjGzL4hqr/vBVY/MauQgS1xWxCDT1oMx1EULyqxncdCY/NVSQ==",
+        "dependencies": {
+          "@octokit/openapi-types": "@octokit/openapi-types@22.2.0"
+        }
+      }
+    }
+  },
   "remote": {
     "https://deno.land/std@0.189.0/_util/asserts.ts": "178dfc49a464aee693a7e285567b3d0b555dc805ff490505a8aae34f9cfb1462",
     "https://deno.land/std@0.189.0/async/abortable.ts": "fd682fa46f3b7b16b4606a5ab52a7ce309434b76f820d3221bdfb862719a15d7",
@@ -22,10 +39,8 @@
     "https://esm.sh/@octokit/webhooks@11.0.0": "5dd3affa37b7437f15716c3a851e254fada03bea1d7f5c8df12da44713a74567"
   },
   "workspace": {
-    "packageJson": {
-      "dependencies": [
-        "npm:typescript@5.5.3"
-      ]
-    }
+    "dependencies": [
+      "npm:@octokit/types@13.5.0"
+    ]
   }
 }
