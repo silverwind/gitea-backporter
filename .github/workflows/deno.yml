@@ -18,7 +18,6 @@ jobs:
       - uses: denoland/setup-deno@v1
       - run: deno fmt --check
       - run: deno lint
-      - run: echo $SHELL
       - run: shopt -s globstar; deno check src/**/*.ts
       - run: deno test -A
         env:
