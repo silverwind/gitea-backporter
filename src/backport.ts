@@ -9,7 +9,7 @@ import {
   fetchCurrentUser,
   fetchPr,
 } from "./github.ts";
-import type {Issue} from "./types.ts";
+import type { Issue } from "./types.ts";
 
 if (
   !Deno.env.get("BACKPORTER_GITEA_FORK") ||
