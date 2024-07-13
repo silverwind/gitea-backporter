@@ -18,8 +18,7 @@ jobs:
       - uses: denoland/setup-deno@v1
       - run: deno fmt --check
       - run: deno lint
-      - run: echo $PWD
-      - run: ls -la $PWD
+      - run: echo src/**/*.ts
       - run: deno check src/*.ts
       - run: deno test -A
         env:
