@@ -20,7 +20,7 @@ jobs:
       - run: deno lint
       - run: echo $PWD
       - run: ls -la $PWD
-      - run: deno check src/**/*.ts
+      - run: deno check src/*.ts
       - run: deno test -A
         env:
           BACKPORTER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
