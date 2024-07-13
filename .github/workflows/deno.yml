@@ -18,7 +18,8 @@ jobs:
       - uses: denoland/setup-deno@v1
       - run: deno fmt --check
       - run: deno lint
-      - run: deno check src/*.ts
+      - run: echo $SHELL
+      - run: shopt -s globstar; deno check src/**/*.ts
       - run: deno test -A
         env:
           BACKPORTER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
